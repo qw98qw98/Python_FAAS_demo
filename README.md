@@ -1,0 +1,2 @@
+# Python_FAAS_demo
+一个简单的Demo,通过Flask实现了基于serverless实现的FAAS服务.
