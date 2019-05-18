@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginText</title>
+    <link rel="stylesheet" type="text/css" href="../static/nav_and_logo.css">
+    <style>
+        #login{
+            border: 4px solid #32dbc6;
+            background-color: #ebefd0;
+            margin: 0% 10% 10% 10%;
+        }
+    </style>
+</head>
+<body>
+<div id="logo"><img src="../static/logo.png" alt="logo"></div>
+<div id="navbar">
+    <ul>
+        <li><a href="http://127.0.0.1:5000/index">主页</a></li>
+        <li><a href="http://127.0.0.1:5000/login">用户登录</a></li>
+        <li><a href="http://127.0.0.1:5000/code">代码编辑</a></li>
+<li style="float:right"><a href="#about">关于</a></li>
+        <li style="float:right"><a href="http://127.0.0.1:5000/logout">注销</a></li>
+        <li style="float:right"><a href="http://127.0.0.1:5000/register">注册</a></li>
+    </ul>
+<fieldset id="login">
+    <legend>用户认证:</legend>
+    <form action="http://127.0.0.1:5000/login_message" method="post">
+          <label for="username">username:</label><br>
+          <input type="text" name="username"/><br>
+          <label for="password">password:</label><br>
+          <input type="password" name="password"/><br>
+          <input type="submit" value="提交" onclick=""/>
+    </form>
+</fieldset>
+</div>
+
+</body>
+</html>

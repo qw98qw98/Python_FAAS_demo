@@ -1,0 +1,28 @@
+#logo{
+    margin: auto;
+    border: 1px solid #bebebe;
+}
+#navbar li{
+    display: inline;
+    float: left;
+}
+#navbar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+#navbar li a:hover{
+    background-color: #111;
+}
+#navbar li a:active {
+    background-color: #4CAF50;
+}
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}

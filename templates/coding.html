@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding</title>
+    <link type="text/css" href="../static/nav_and_logo.css" rel="stylesheet">
+    <link type="text/css" href="../static/dropdown.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <style>
+        #TestCode{
+            width: 99.5%;
+            height: 500px;
+            overflow: auto;
+            border: 1px solid #c5c5c5;
+            border-right: 0;
+            font: 14px "Courier New", Courier, monospace;
+        }
+        #ans{
+            width: 99.4%;
+            height: 500px;
+            border: 1px solid #c5c5c5;
+        }
+        #codetable table{
+            width:100%;
+        }
+        #codetable{
+            margin: 0;
+            padding: 0;
+        }
+        #codetable table td{
+            width:50%;
+        }
+        .editfont{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="logo"><img src="../static/logo.png" alt="logo"></div>
+<div id="navbar">
+    <ul>
+        <li><a href="http://127.0.0.1:5000/index">主页</a></li>
+        <li><a href="http://127.0.0.1:5000/login">用户登录</a></li>
+        <li><a href="http://127.0.0.1:5000/code">代码编辑</a></li>
+        <li style="float:right"><a href="#about">关于</a></li>
+        <li style="float:right"><a href="http://127.0.0.1:5000/logout">注销</a></li>
+        <li style="float:right"><a href="http://127.0.0.1:5000/register">注册</a></li>
+    </ul>
+</div>
+
+<div id="code-submit">
+    <a href="#"><img src="../static/codesub.png" alt="提交" width="50%" height="50%"
+    onclick="submitevevt()"></a>
+</div>
+<div id="codetable">
+    <table>
+       <tr>
+           <td><h2 class="editfont">代码输入:</h2></td>
+           <td><h2 class="editfont">查看结果:</h2></td>
+       </tr>
+       <tr>
+           <td><textarea id="TestCode" wrap="logical"></textarea></td>
+           <td><div id="ans"></div></td>
+       </tr>
+    </table>
+</div>
+<script>
+    var socket=io("http://"+document.domain+":"+location.port);
+    socket.on('connect', function() {
+        socket.emit('message', {data: 'I\'m connected!'});
+    });
+    socket.on("code_screen",function (data) {
+        alert("666333");
+        alert(data);
+        pagraph=document.createElement("p");
+        pagraph.innerText=data;
+        $("#ans").append(pagraph);
+        socket.emit("response",{my:'I get the message!'});
+    });
+    function submitevevt() {
+        var codearea=$("#TestCode");
+        var code=codearea.val();
+        var data={
+            data:JSON.stringify({"code":code.toString()})
+        }
+        $.ajax({
+            url:"/code/code_handler",
+            type:"post",
+            data:data,
+            success:function (msg) {
+                console.log("data post success")
+            }
+        });
+    }
+</script>
+</body>
+</html>
