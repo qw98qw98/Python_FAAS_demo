@@ -78,7 +78,6 @@
         socket.emit('message', {data: 'I\'m connected!'});
     });
     socket.on("code_screen", function (data) {
-        alert(data);
         pagraph = document.createElement("p");
         pagraph.innerText = data;
         $("#ans").append(pagraph);
