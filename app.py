@@ -158,11 +158,11 @@ def python_code_handler():
     if request.method == "POST":
         data = json.loads(request.values.get("code"))
         filename = str(current_user.username) + "_" + str(time.time()).replace(".", 'x') + ".py"
-        textfile = "G:\\Docker_trial\\pythonSrc\\"
+        textfile = "../userFile"
         with open(textfile + filename, "w") as f:
             f.write(data["code"])
-        command = f"python {filename}"
-        mount = Mount(type="bind", target="/usr/src/app/", source="G:\\Docker_trial\\pythonSrc", read_only=True)
+        command = "python {filename:}".format(filename)
+        mount = Mount(type="bind", target="/usr/src/app/", source="../userFile", read_only=True)
         container = client.containers.run(image="python:my", command=command, detach=True,
                                           auto_remove=False, remove=False, mounts=[mount], name=filename)
         time.sleep(1)
