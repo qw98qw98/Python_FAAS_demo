@@ -22,7 +22,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 socketio = SocketIO(app)
 db = SQLAlchemy(app)
-from flask_login import config
 from model import *
 
 CORS(app, supports_credentials=True)
@@ -162,7 +161,7 @@ def python_code_handler():
         with open(textfile + filename, "w") as f:
             f.write(data["code"])
         command = "python {}".format(filename)
-	mount = Mount(type="bind", target="/root", source="/root/FLASK/userFile", read_only=True)
+	    mount = Mount(type="bind", target="/root", source="/root/FLASK/userFile", read_only=True)
         container = client.containers.run(image="python:my", command=command, detach=True,
                                           auto_remove=False, remove=False, mounts=[mount], name=filename)
         time.sleep(1)
