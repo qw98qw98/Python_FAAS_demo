@@ -105,7 +105,7 @@ def show(codetext):
 
 @socketio.on("response")
 def debugshou(data):
-    print(data);
+    print(data)
 
 
 @socketio.on('message')

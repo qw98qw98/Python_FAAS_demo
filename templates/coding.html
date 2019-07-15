@@ -45,12 +45,12 @@
 <div id="logo"><img src="../static/logo.png" alt="logo"></div>
 <div id="navbar">
     <ul>
-        <li><a href="http://127.0.0.1:5000/index">主页</a></li>
-        <li><a href="http://127.0.0.1:5000/login">用户登录</a></li>
-        <li><a href="http://127.0.0.1:5000/code">代码编辑</a></li>
+        <li><a href="/index">主页</a></li>
+        <li><a href="/login">用户登录</a></li>
+        <li><a href="/code">代码编辑</a></li>
         <li style="float:right"><a href="#about">关于</a></li>
-        <li style="float:right"><a href="http://127.0.0.1:5000/logout">注销</a></li>
-        <li style="float:right"><a href="http://127.0.0.1:5000/register">注册</a></li>
+        <li style="float:right"><a href="/logout">注销</a></li>
+        <li style="float:right"><a href="/register">注册</a></li>
     </ul>
 </div>
 
@@ -88,7 +88,7 @@
         var codearea = $("#TestCode");
         var code = codearea.val();
         $.ajax({
-            url: 'http://127.0.0.1:5000/api/code_handler',
+            url: '/api/code_handler',
             type: "POST",
             data: {
                 code: JSON.stringify({"code": code.toString()})
