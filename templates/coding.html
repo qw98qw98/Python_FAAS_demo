@@ -8,7 +8,7 @@
     <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
     <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
     <style>
-        #TestCode{
+        #TestCode {
             width: 99.5%;
             height: 500px;
             overflow: auto;
@@ -16,22 +16,27 @@
             border-right: 0;
             font: 14px "Courier New", Courier, monospace;
         }
-        #ans{
+
+        #ans {
             width: 99.4%;
             height: 500px;
             border: 1px solid #c5c5c5;
         }
-        #codetable table{
-            width:100%;
+
+        #codetable table {
+            width: 100%;
         }
-        #codetable{
+
+        #codetable {
             margin: 0;
             padding: 0;
         }
-        #codetable table td{
-            width:50%;
+
+        #codetable table td {
+            width: 50%;
         }
-        .editfont{
+
+        .editfont {
             color: red;
         }
     </style>
@@ -50,49 +55,47 @@
 </div>
 
 <div id="code-submit">
-    <a href="#"><img src="../static/codesub.png" alt="提交" width="50%" height="50%"
-    onclick="submitevevt()"></a>
+    <a href="#"><img id="submit" src="../static/codesub.png" alt="提交" width="50%" height="50%"
+                     onclick="submitevevt"></a>
 </div>
 <div id="codetable">
     <table>
-       <tr>
-           <td><h2 class="editfont">代码输入:</h2></td>
-           <td><h2 class="editfont">查看结果:</h2></td>
-       </tr>
-       <tr>
-           <td><textarea id="TestCode" wrap="logical"></textarea></td>
-           <td><div id="ans"></div></td>
-       </tr>
+        <tr>
+            <td><h2 class="editfont">代码输入:</h2></td>
+            <td><h2 class="editfont">查看结果:</h2></td>
+        </tr>
+        <tr>
+            <td><textarea id="TestCode" wrap="logical"></textarea></td>
+            <td>
+                <div id="ans"></div>
+            </td>
+        </tr>
     </table>
 </div>
 <script>
-    var socket=io("http://"+document.domain+":"+location.port);
-    socket.on('connect', function() {
+    var socket = io("http://" + document.domain + ":" + location.port);
+    socket.on('connect', function () {
         socket.emit('message', {data: 'I\'m connected!'});
     });
-    socket.on("code_screen",function (data) {
-        alert("666333");
+    socket.on("code_screen", function (data) {
         alert(data);
-        pagraph=document.createElement("p");
-        pagraph.innerText=data;
+        pagraph = document.createElement("p");
+        pagraph.innerText = data;
         $("#ans").append(pagraph);
-        socket.emit("response",{my:'I get the message!'});
+        socket.emit("response", {my: 'I get the message!'});
     });
-    function submitevevt() {
-        var codearea=$("#TestCode");
-        var code=codearea.val();
-        var data={
-            data:JSON.stringify({"code":code.toString()})
-        }
+    $("#submit").on("click", function () {
+        var codearea = $("#TestCode");
+        var code = codearea.val();
         $.ajax({
-            url:"/code/code_handler",
-            type:"post",
-            data:data,
-            success:function (msg) {
-                console.log("data post success")
+            url: 'http://127.0.0.1:5000/api/code_handler',
+            type: "POST",
+            data: {
+                code: JSON.stringify({"code": code.toString()})
             }
         });
-    }
+        return false;
+    })
 </script>
 </body>
 </html>

@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>register</title>
-        <link rel="stylesheet" type="text/css" href="../static/nav_and_logo.css">
+    <link rel="stylesheet" type="text/css" href="../static/nav_and_logo.css">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <style>
-        #login{
+
+        #login {
             border: 4px solid #32dbc6;
             background-color: #ebefd0;
             margin: 0% 10% 10% 10%;
@@ -19,22 +21,37 @@
         <li><a href="http://127.0.0.1:5000/index">主页</a></li>
         <li><a href="http://127.0.0.1:5000/login">用户登录</a></li>
         <li><a href="http://127.0.0.1:5000/code">代码编辑</a></li>
-<li style="float:right"><a href="#about">关于</a></li>
+        <li style="float:right"><a href="#about">关于</a></li>
         <li style="float:right"><a href="http://127.0.0.1:5000/logout">注销</a></li>
         <li style="float:right"><a href="http://127.0.0.1:5000/register">注册</a></li>
     </ul>
-    </div>
+</div>
 <fieldset id="login">
     <legend>用户认证:</legend>
-    <form action="http://127.0.0.1:5000/register_message" method="post">
-          <label for="username">username:</label><br>
-          <input type="text" name="username"/><br>
-          <label for="password">password:</label><br>
-          <input type="password" name="password"/><br>
-          <input type="checkbox" name="remember" value="true"/>记住我<br>
-          <input type="submit" value="提交"/>
+    <form>
+        <label for="username">username:</label><br>
+        <input id="username" type="text" name="username"/><br>
+        <label for="password">password:</label><br>
+        <input id="password" type="password" name="password"/><br>
+        <input id="rem" type="checkbox" name="remember" value="true"/>记住我<br>
+        <input id="Sub" type="submit" value="提交"/>
     </form>
 </fieldset>
-
+<script>
+    $("#Sub").on("click",    function () {
+        var username = $('#password').val();
+        var password = $('#username').val();
+        var rememberme = $('#rem').value;
+        $.ajax({
+            url: 'http://127.0.0.1:5000/api/regist',
+            type: "POST",
+            data: {
+                "username": username,
+                "password": password,
+            }
+        });
+        return false;
+    });
+</script>
 </body>
 </html>
